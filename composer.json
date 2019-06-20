@@ -1,0 +1,16 @@
+{
+    "name": "Microservice in PHP prototype",
+    "description": "This is a microservice prototype based in PHP with 2 examples endpoints GET & POST",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Diego Hernandez",
+            "email": "diegohernandez.com@gmail.com"
+        }
+    ],
+    "minimum-stability" : "dev",
+    "prefer-stable": true,
+    "require": {
+        "prodigyview/prodigyview": "dev-master"
+    }
+}
