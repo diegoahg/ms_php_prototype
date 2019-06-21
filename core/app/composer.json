@@ -11,6 +11,9 @@
     "minimum-stability" : "dev",
     "prefer-stable": true,
     "require": {
-        "prodigyview/prodigyview": "dev-master"
+        "prodigyview/prodigyview": "dev-master",
+        "phpunit/phpunit": "^7",
+        "phpunit/php-code-coverage": "^6.1",
+        "guzzlehttp/guzzle": "^6.3"
     }
 }

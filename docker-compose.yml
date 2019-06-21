@@ -4,23 +4,14 @@ services:
  ms-app:
 
    # Build the Dockerfile that is in the web directory
-   build: web
+   build: core
 
-   # Always restart the container regardless of the exit status; try and restart the container indefinitely
-   restart: always
+   volumes:
+     - ./web:/home/flask/app/web
 
    # Expose port 8000 to other containers (not to the host of the machine)
    expose:
      - "8000"
-
-   # Mount the web directory within the container at /home/ms-app/app/web
-   volumes:
-     - ./web:/home/ms-app/web
-
-   # Don't create this container until the redis and postgres containers (below) have been created
-   #depends_on:
-    # - redis
-    # - postgres
 
  # Define the redis NGINX forward proxy container
  nginx:
@@ -31,11 +22,10 @@ services:
 
    # Expose port 80 to the host machine
    ports:
-     - "80:80"
-   deploy:
-     mode: replicated
-     replicas: 3
+     - "8080:8000"
 
    # The Flask application needs to be available for NGINX to make successful proxy requests
    depends_on:
+     - ms-app
+   links:
      - ms-app
