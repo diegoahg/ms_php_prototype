@@ -1,5 +1,5 @@
 {
-    "name": "Microservice in PHP prototype",
+    "name": "diegoahg/diegoahg",
     "description": "This is a microservice prototype based in PHP with 2 examples endpoints GET & POST",
     "type": "project",
     "authors": [

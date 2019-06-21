@@ -1,5 +1,5 @@
 <?php
-include_once (dirname(__FILE__) . '/../vendor/autoload.php');
+include_once (dirname(__FILE__) . '/vendor/autoload.php');
 
 
 use prodigyview\network\Router;
@@ -8,12 +8,25 @@ use prodigyview\network\Response;
 use prodigyview\network\Socket;
 use prodigyview\system\Security;
 
-function getFib($n)
+/**
+ * Get the position into fibonacci sequence
+ *
+ * @param integer $position Is the position that you wanna get in the sequence
+ * 
+ * @author Diego Hernández <dhernandez@altiuz.com>
+ * @return integer
+ */ 
+function getFib($position)
 {
-    return round(pow((sqrt(5)+1)/2, $n) / sqrt(5));
+    return round(pow((sqrt(5)+1)/2, $position) / sqrt(5));
 }
 
 Router::init();
+
+Router::get('/', array('callback'=>function(Request $request){
+	$response = array('status' => 'OK', 'message' => 'Si ves esto es porque funcionó la conexion al microservicio');
+	echo Response::createResponse(200, json_encode($response));
+}));
 
 Router::get('/hello', array('callback'=>function(Request $request){
 	$response = array('status' => 'success', 'message' => 'Hola Mundo');
