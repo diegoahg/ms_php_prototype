@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Hola mundo con Vue.js</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+
+        <input type="text" v-model='newStudentName' placeholder="Name">
+        <input type="text" v-model='newStudentScore' placeholder="Score">
+        <input type="text" v-model='newStudentAge' placeholder="Age">
+        <button @click="addStudent">Add</button>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>Score</td>
+                <td>Approved</td>
+                <td>Age</td>
+            </tr>
+            <tr v-for="student of students">
+                <td>{{student.name}}</td>
+                <td>{{student.score}}</td>
+                <td>
+                    <span v-if="student.score >= 4">Yes</span>
+                    <span v-else>No</span>
+                </td>
+                <td>{{student.age}}</td>
+            </tr>
+
+            </tr>
+        </table>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="01.js"></script>
+</body>
+
+</html>
