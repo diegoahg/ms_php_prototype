@@ -1,12 +1,15 @@
-from php:7.2.19-cli-alpine
+from php:7.2-apache
 
-RUN apk update
+RUN apt-get update
+RUN apt-get -y install git zip unzip
+RUN apt-get -y install vim
 RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-COPY . /ms-app
-WORKDIR /ms-app/app
+COPY . /var/www/html/core
+COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
+WORKDIR /var/www/html/core/app
 
 RUN composer install --no-plugins --no-scripts
-RUN composer update --no-plugins --no-scripts
 
-ENTRYPOINT ["php", "-S", "localhost:8000"]
+RUN a2enmod rewrite
+#RUN composer update --no-plugins --no-scripts

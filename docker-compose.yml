@@ -1,31 +1,23 @@
 version: '3'
 services:
  # Define the API PHP application
- ms-app:
+  core:
+    # Build the Dockerfile that is in the web directory
+    build: ./core
+    restart: always
 
-   # Build the Dockerfile that is in the web directory
-   build: core
+    #volumes:
+    # - ./core:/home/core/app/web
 
-   volumes:
-     - ./web:/home/flask/app/web
-
-   # Expose port 8000 to other containers (not to the host of the machine)
-   expose:
-     - "8000"
+    # Expose port 8080 to other containers (not to the host of the machine)
+    ports:
+     - "9000:80"
 
  # Define the redis NGINX forward proxy container
- nginx:
-
-   # build the nginx Dockerfile: http://bit.ly/2kuYaIv
-   build: nginx/
-   restart: always
-
-   # Expose port 80 to the host machine
-   ports:
-     - "8080:8000"
-
-   # The Flask application needs to be available for NGINX to make successful proxy requests
-   depends_on:
-     - ms-app
-   links:
-     - ms-app
+  nginx:
+    # build the nginx Dockerfile: http://bit.ly/2kuYaIv
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - core
